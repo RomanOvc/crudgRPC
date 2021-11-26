@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package usercrud;
+
+option go_package = "/usercrud";
+
+
+service UserCrudMnagment{
+    rpc GetAll(Empty) returns (CustomerList) {}
+    rpc GetByIdCustomer (CustomerRequestId) returns (Customer) {}
+    rpc InsertCustomer (ICustomer) returns (StateMessage) {}
+    rpc UpdateCustomer (Customer) returns (Customer) {}
+    rpc RemoveCustomer (CustomerRequestId) returns (StateMessage) {}
+}
+
+message Empty {
+   
+}
+
+message StateMessage{
+    int64 state = 1;
+}
+
+message Customer{
+    string customer_id = 1;
+    string name = 2;
+    int64 age = 3;
+    string address = 4;
+}
+
+message CustomerList {
+    repeated Customer customer = 1;
+}
+
+message CustomerRequestId{
+    string customer_id = 1;
+}
+
+message ICustomer{
+    string name = 1;
+    int64 age = 2;
+    string address = 3;
+}
